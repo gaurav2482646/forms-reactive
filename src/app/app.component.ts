@@ -7,6 +7,7 @@ import {FormArray, FormControl, FormGroup, Validator, Validators} from '@angular
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  forbiddenUsernames = ['ana','john']
   ngOnInit(): void {
     this.signupForm = new FormGroup({
       'userData': new FormGroup({
@@ -28,5 +29,11 @@ export class AppComponent implements OnInit {
   onAddHobby(){
     const  control = new FormControl(null,Validators.required);
     (<FormArray>this.signupForm.get('hobbies')).push(control);
+  }
+
+  forbiddenNames(control: FormControl):{[s : string]: boolean}{
+    if(this.forbiddenUsernames.indexOf(control.value)){
+      return{'nameForbuidden' }
+    }
   }
 }
